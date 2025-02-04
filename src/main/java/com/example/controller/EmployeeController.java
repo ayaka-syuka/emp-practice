@@ -92,7 +92,7 @@ public class EmployeeController {
 	@GetMapping("/showDetail")
 	public String showDetail(String id, Model model) {
 
-	
+
 
 
 		Employee employee = employeeService.showDetail(Integer.parseInt(id));
