@@ -32,7 +32,7 @@ public class EmployeeService {
 		return employeeList;
 	}
 
-	public List<Employee> searchByName(String name){
+	public List<Employee> search(String name){
 		return employeeRepository.findByNameContaining(name);
 	}
 

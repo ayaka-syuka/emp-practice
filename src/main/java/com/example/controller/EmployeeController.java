@@ -65,6 +65,18 @@ public class EmployeeController {
 		return "employee/list";
 	}
 
+	@GetMapping("/search")
+	public String search(String name,Model model){
+
+		List<Employee> employeeList = employeeService.search(name);
+		model.addAttribute("employeeList",employeeList);
+		return "employee/list";
+
+		}
+	
+
+	
+
 
 
 	/////////////////////////////////////////////////////
@@ -80,7 +92,7 @@ public class EmployeeController {
 	@GetMapping("/showDetail")
 	public String showDetail(String id, Model model) {
 
-		
+
 
 
 		Employee employee = employeeService.showDetail(Integer.parseInt(id));
@@ -90,6 +102,10 @@ public class EmployeeController {
 		return "employee/detail";
 
 	}
+
+	
+
+	
 
 	
 
