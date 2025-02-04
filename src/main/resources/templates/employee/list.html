@@ -67,7 +67,7 @@
               </li>
             </ul>
             <p class="navbar-text navbar-right">
-              <span th:text="${AdministratorsName}"></span>
+              <span th:text="${session['loggedInAdministrator'].name}"></span>
                さんこんにちは！ &nbsp;&nbsp;&nbsp;
               <a
                 href="../administrator/login.html"
