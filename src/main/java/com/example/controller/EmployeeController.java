@@ -58,18 +58,24 @@ public class EmployeeController {
 	 */
 	@GetMapping("/showList")
 	public String showList(Model model) {
-		Administrator loggedInAdmin = (Administrator) session.getAttribute("loggedInAdministrator");
-		if (loggedInAdmin != null) {
-			model.addAttribute("AdministratorsName", loggedInAdmin.getName());
-		}else {
-			model.addAttribute("errorMessage", "ログインセッションが無効です。再度ログインしてください。");
-			return "redirect:/login";
-		}
+		
        
 		List<Employee> employeeList = employeeService.showList();
 		model.addAttribute("employeeList", employeeList);
 		return "employee/list";
 	}
+
+	@GetMapping("/search")
+	public String search(String name,Model model){
+
+		List<Employee> employeeList = employeeService.search(name);
+		model.addAttribute("employeeList",employeeList);
+		return "employee/list";
+
+		}
+	
+
+	
 
 
 
@@ -86,13 +92,7 @@ public class EmployeeController {
 	@GetMapping("/showDetail")
 	public String showDetail(String id, Model model) {
 
-		Administrator loggedInAdmin = (Administrator) session.getAttribute("loggedInAdministrator");
-    if (loggedInAdmin != null) {
-        model.addAttribute("AdministratorsName", loggedInAdmin.getName());
-    } else {
-        model.addAttribute("errorMessage", "ログインセッションが無効です。再度ログインしてください。");
-        return "redirect:/login";  // ログインページにリダイレクト
-    }
+	
 
 
 		Employee employee = employeeService.showDetail(Integer.parseInt(id));
@@ -102,6 +102,10 @@ public class EmployeeController {
 		return "employee/detail";
 
 	}
+
+	
+
+	
 
 	
 

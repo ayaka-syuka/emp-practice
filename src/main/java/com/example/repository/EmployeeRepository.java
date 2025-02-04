@@ -85,7 +85,16 @@ public class EmployeeRepository {
 	}
 
     public List<Employee> findByNameContaining(String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByNameContaining'");
+        if(name == null || name.isEmpty()){
+			return findAll();
+		}
+		String searchName = "%" + name + "%";
+
+		String sql = "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics, dependents_count "
+		+ "FROM employees WHERE name LIKE :name";
+
+				SqlParameterSource param = new MapSqlParameterSource().addValue("name", searchName);
+
+				return template.query(sql, param, EMPLOYEE_ROW_MAPPER);
     }
 }
