@@ -67,7 +67,7 @@
               </li>
             </ul>
             <p class="navbar-text navbar-right">
-              <span th:text="${administrators.name}"></span>
+              <span th:text="${AdministratorsName}"></span>
                さんこんにちは！ &nbsp;&nbsp;&nbsp;
               <a
                 href="../administrator/login.html"
@@ -88,6 +88,11 @@
           <a href="list.html" th:href="@{/employee/showList}">従業員リスト</a>
         </li>
       </ol>
+<!-- 
+      <form action="/employee/search" method="post">
+      名前：<input type="text" name="name">
+      <button>検索</button>
+      </form> -->
 
       <!-- table -->
       <div class="row">

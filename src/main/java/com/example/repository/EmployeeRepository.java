@@ -83,4 +83,9 @@ public class EmployeeRepository {
 		String updateSql = "UPDATE employees SET dependents_count=:dependentsCount WHERE id=:id";
 		template.update(updateSql, param);
 	}
+
+    public List<Employee> findByNameContaining(String name) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByNameContaining'");
+    }
 }
