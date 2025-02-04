@@ -35,60 +35,60 @@ public class AdministratorRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-
-	/**
-	 * 主キーから管理者情報を取得します.
-	 * 
-	 * @param id ID
-	 * @return 管理者情報
-	 * @throws org.springframework.dao.DataAccessException 存在しない場合は例外を発生します
-	 */
-	public Administrator load(Integer id) {
-		String sql = "select id,name,mail_address,password from administrators where id=:id";
-		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
-		Administrator administrator = template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
-		return administrator;
-	}
-
-	/**
-	 * メールアドレスとパスワードから管理者情報を取得します.
-	 * 
-	 * @param mailAddress メールアドレス
-	 * @param password    パスワード
-	 * @return 管理者情報 存在しない場合はnullを返します
-	 */
-	public Administrator findByMailAddressAndPassward(String mailAddress, String password) {
-		String sql = "select id,name,mail_address,password from administrators where mail_address= '" + mailAddress
-				+ "' and password='" + password + "'";
-		SqlParameterSource param = new MapSqlParameterSource();
-		List<Administrator> administratorList = template.query(sql, param, ADMINISTRATOR_ROW_MAPPER);
-		if (administratorList.size() == 0) {
-			return null;
+	
+		/**
+		 * 主キーから管理者情報を取得します.
+		 * 
+		 * @param id ID
+		 * @return 管理者情報
+		 * @throws org.springframework.dao.DataAccessException 存在しない場合は例外を発生します
+		 */
+		public Administrator load(Integer id) {
+			String sql = "select id,name,mail_address,password from administrators where id=:id";
+			SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+			Administrator administrator = template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
+			return administrator;
 		}
-		return administratorList.get(0);
-	}
-
-	/**
-	 * 管理者情報を挿入します.
-	 * 
-	 * @param administrator 管理者情報
-	 */
-	public void insert(Administrator administrator) {
-		SqlParameterSource param = new BeanPropertySqlParameterSource(administrator);
-		String sql = "insert into administrators(name,mail_address,password)values(:name,:mailAddress,:password);";
-		template.update(sql, param);
-	}
-
-	/**
-	 * メールアドレスから管理者情報を取得します.
-	 * 
-	 * @param mailAddress メールアドレス
-	 * @return 管理者情報 存在しない場合はnullを返します
-	 */
-	public Administrator findByMailAddress(String mailAddress) {
-		String sql = "select id,name,mail_address,password from administrators where mail_address=:mailAddress";
-		SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress", mailAddress);
-		List<Administrator> administratorList = template.query(sql, param, ADMINISTRATOR_ROW_MAPPER);
+	
+		/**
+		 * メールアドレスとパスワードから管理者情報を取得します.
+		 * 
+		 * @param mailAddress メールアドレス
+		 * @param password    パスワード
+		 * @return 管理者情報 存在しない場合はnullを返します
+		 */
+		public Administrator findByMailAddressAndPassward(String mailAddress, String password) {
+			String sql = "select id,name,mail_address,password from administrators where mail_address= '" + mailAddress
+					+ "' and password='" + password + "'";
+			SqlParameterSource param = new MapSqlParameterSource();
+			List<Administrator> administratorList = template.query(sql, param, ADMINISTRATOR_ROW_MAPPER);
+			if (administratorList.size() == 0) {
+				return null;
+			}
+			return administratorList.get(0);
+		}
+	
+		/**
+		 * 管理者情報を挿入します.
+		 * 
+		 * @param administrator 管理者情報
+		 */
+		public void insert(Administrator administrator) {
+			SqlParameterSource param = new BeanPropertySqlParameterSource(administrator);
+			String sql = "insert into administrators(name,mail_address,password)values(:name,:mailAddress,:password);";
+			template.update(sql, param);
+		}
+	
+		/**
+		 * メールアドレスから管理者情報を取得します.
+		 * 
+		 * @param mailAddress メールアドレス
+		 * @return 管理者情報 存在しない場合はnullを返します
+		 */
+		public  Administrator findByMailAddress(String mailAddress) {
+			String sql = "select id,name,mail_address,password from administrators where mail_address=:mailAddress";
+			SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress", mailAddress);
+			List<Administrator> administratorList = template.query(sql, param, ADMINISTRATOR_ROW_MAPPER);
 		if (administratorList.size() == 0) {
 			return null;
 		}

@@ -90,7 +90,8 @@
       </ol>
 
       <form action="/employee/search" method="get">
-      名前：<input type="text" name="name">
+      名前：<input type="text" name="name" placeholder="名前を検索"
+            th:value="${searchName}">
       <button>検索</button>
       </form>
 

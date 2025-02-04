@@ -70,6 +70,7 @@ public class EmployeeController {
 
 		List<Employee> employeeList = employeeService.search(name);
 		model.addAttribute("employeeList",employeeList);
+		model.addAttribute("searchName", name);
 		return "employee/list";
 
 		}
